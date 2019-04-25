@@ -7,7 +7,7 @@ const bcryptauth = require("./utils/bc");
 const db = require("./utils/db");
 
 app.use(express.static("./public"));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(
     cookieSession({
         maxAge: 1000 * 60 * 60 * 24 * 14,
@@ -37,11 +37,15 @@ app.get("/welcome", (req, res) => {
 
 app.post("/register", (req, res) => {
     console.log("registration going on", req.body);
-    bcryptauth.hashPassword(req.body.pass).then(hash => {
-        db.registerUser(req.body.first, req.body.last, req.body.email, hash)
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let email = req.body.email;
+    let password = req.body.password;
+    bcryptauth.hashPassword(password).then(password => {
+        db.registerUser(firstname, lastname, email, password)
             .then(data => {
                 console.log(data);
-                req.session.userId = data.rows[0].id;
+                // req.session.userId = data.rows[0].id;
                 console.log(req.session, "this is session label");
                 res.json("/");
             })

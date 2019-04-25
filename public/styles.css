@@ -1,8 +1,25 @@
 * {
-    background-color: #d8dfe2;
+    /* background-color: #d8dfe2; */
+    background-image: url("backgroundimage.jpg");
+}
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Permanent Marker", cursive;
 }
 .logo {
+    border: solid 2px tomato;
     width: 80px;
     height: 80px;
-    position: fixed;
+}
+#boxregister {
+    border: solid 2px aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#registration {
+    border: solid 2px salmon;
 }

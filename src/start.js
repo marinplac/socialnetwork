@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Registration from "./registration";
+import Welcome from "./welcome";
 
 let elem;
 
 if (location.pathname == "/welcome") {
     // console.log("do something");
-    elem = <Registration />;
+    elem = <Welcome />;
 } else {
     // console.log("do something else");
-    elem = <img className="logo" src="/images/nature.jpg" />;
+    elem = <img className="logo" src="/nature.jpg" />;
 }
 
 ReactDOM.render(elem, document.querySelector("main"));
