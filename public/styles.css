@@ -1,6 +1,5 @@
 * {
     /* background-color: #d8dfe2; */
-    background-image: url("backgroundimage.jpg");
 }
 main {
     display: flex;
@@ -8,6 +7,11 @@ main {
     justify-content: center;
     align-items: center;
     font-family: "Permanent Marker", cursive;
+    color: #d8dfe2;
+    background-image: url(b.jpg);
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
 }
 .logo {
     border: solid 2px tomato;
@@ -22,4 +26,6 @@ main {
 }
 #registration {
     border: solid 2px salmon;
+    height: 500px;
+    width: 300px;
 }

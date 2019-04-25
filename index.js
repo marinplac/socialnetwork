@@ -5,6 +5,7 @@ const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
 const bcryptauth = require("./utils/bc");
 const db = require("./utils/db");
+const csurf = require("csurf");
 
 app.use(express.static("./public"));
 app.use(bodyParser.json());
@@ -15,6 +16,11 @@ app.use(
     })
 );
 app.use(compression());
+app.use(csurf());
+app.use(function(req, res, next) {
+    res.cookie("mytoken", req.csrfToken());
+    next();
+});
 
 if (process.env.NODE_ENV != "production") {
     app.use(
@@ -45,15 +51,42 @@ app.post("/register", (req, res) => {
         db.registerUser(firstname, lastname, email, password)
             .then(data => {
                 console.log(data);
-                // req.session.userId = data.rows[0].id;
+                req.session.userId = data.rows[0].id;
                 console.log(req.session, "this is session label");
-                res.json("/");
+                res.json({ success: true });
             })
             .catch(err => {
                 console.log("err in register:", err);
+                res.json({ success: false });
             });
     });
 });
+app.post("/login", (req, res) => {
+    console.log("logging in going on", req.body);
+    let email = req.body.email;
+    let password = req.body.password;
+    db.getRegisteredPass(email)
+        .then(result => {
+            bcryptauth
+                .checkPassword(password, result.rows[0].password)
+                .then(match => {
+                    if (match) {
+                        req.session.userId = result.rows[0].id;
+                        res.json({ success: true });
+                    } else {
+                        res.json({ success: false });
+                    }
+                })
+                .catch(err => {
+                    res.json({ success: false });
+                });
+        })
+        .catch(err => {
+            res.json({ success: false });
+        });
+});
+
+//do not ever delete this!//
 
 app.get("*", function(req, res) {
     if (!req.session.userId) {
@@ -64,5 +97,5 @@ app.get("*", function(req, res) {
 });
 
 app.listen(8080, function() {
-    console.log("I'm listening.");
+    console.log("I'm listening to your commands, master.");
 });

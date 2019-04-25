@@ -15,3 +15,8 @@ exports.registerUser = function registerUser(
     let params = [firstname, lastname, email, password];
     return db.query(q, params);
 };
+exports.getRegisteredPass = function getRegisteredPass(email) {
+    let q = `SELECT password, id FROM users WHERE email = $1`;
+    let params = [email];
+    return db.query(q, params);
+};

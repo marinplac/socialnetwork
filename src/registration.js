@@ -1,5 +1,6 @@
 import React from "react";
-import axios from "axios";
+import axios from "./axios";
+import { Link } from "react-router-dom";
 
 export default class Registration extends React.Component {
     constructor(props) {
@@ -7,6 +8,10 @@ export default class Registration extends React.Component {
         this.state = {};
     }
     submit() {
+        axios
+            .post("/login", { email: this.email, password: this.password })
+            .then(({ data }) => {});
+
         axios
             .post("/register", {
                 firstname: this.firstname,
@@ -32,15 +37,34 @@ export default class Registration extends React.Component {
         return (
             <div id="registration">
                 {this.state.error && <div className="error">Ooops</div>}
-                <input name="firstname" onChange={handleInput} />
                 <p>First name</p>
-                <input name="lastname" onChange={handleInput} />
+                <input
+                    name="firstname"
+                    placeholder="firstname"
+                    onChange={handleInput}
+                />
                 <p>Last name</p>
-                <input name="email" onChange={handleInput} />
+                <input
+                    name="lastname"
+                    placeholder="lastname"
+                    onChange={handleInput}
+                />
                 <p>Email</p>
-                <input name="password" onChange={handleInput} />
+                <input
+                    name="email"
+                    placeholder="email"
+                    onChange={handleInput}
+                />
                 <p>Password</p>
-                <button onClick={e => this.submit()}>Join us</button>
+                <input name="password" type="password" onChange={handleInput} />
+
+                <div id="buttonjoinus">
+                    <button onClick={e => this.submit()}>Join us</button>
+                </div>
+
+                <div>
+                    <Link to="/login">Members please log in.</Link>
+                </div>
             </div>
         );
     }

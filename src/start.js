@@ -10,7 +10,7 @@ if (location.pathname == "/welcome") {
     elem = <Welcome />;
 } else {
     // console.log("do something else");
-    elem = <img className="logo" src="/nature.jpg" />;
+    elem = <img className="logo" src="mountainlogo.png" />;
 }
 
 ReactDOM.render(elem, document.querySelector("main"));
