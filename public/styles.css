@@ -29,3 +29,14 @@ main {
     height: 500px;
     width: 300px;
 }
+.waitasec {
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#waitaseclogo {
+    width: 140px;
+    height: 140px;
+    border-radius: 35px;
+}

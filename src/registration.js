@@ -20,9 +20,6 @@ export default class Registration extends React.Component {
                 password: this.password
             })
             .then(({ data }) => {
-                // this.setState({
-                //     error: true ovde mora da se doradi
-                // })
                 location.replace("/");
             })
             .catch(err => {

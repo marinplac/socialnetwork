@@ -86,6 +86,16 @@ app.post("/login", (req, res) => {
         });
 });
 
+app.get("/user", (req, res) => {
+    console.log("getting the user", req.body);
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let profilePic = req.body.users_image;
+    db.getUser(req.session.userId).then(result => {
+        res.json(result.rows[0]);
+    });
+});
+
 //do not ever delete this!//
 
 app.get("*", function(req, res) {
