@@ -6,6 +6,29 @@ const bodyParser = require("body-parser");
 const bcryptauth = require("./utils/bc");
 const db = require("./utils/db");
 const csurf = require("csurf");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const path = require("path");
+const s3 = require("./utils/s3");
+const config = require("./config.json");
+
+var diskStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function(req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+var uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152
+    }
+});
 
 app.use(express.static("./public"));
 app.use(bodyParser.json());
@@ -86,6 +109,24 @@ app.post("/login", (req, res) => {
         });
 });
 
+app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
+    if (req.file) {
+        const url = config.s3Url + req.file.filename;
+        db.putUrlIntoTable(url, req.session.userId)
+            .then(({ rows }) => {
+                res.json(rows[0]);
+                console.log(rows);
+            })
+            .catch(err => {
+                console.log("err in putInTable:", err);
+            });
+    } else {
+        res.json({
+            success: false
+        });
+    }
+});
+
 app.get("/user", (req, res) => {
     console.log("getting the user", req.body);
     let firstname = req.body.firstname;
@@ -109,3 +150,5 @@ app.get("*", function(req, res) {
 app.listen(8080, function() {
     console.log("I'm listening to your commands, master.");
 });
+
+// function requireUser

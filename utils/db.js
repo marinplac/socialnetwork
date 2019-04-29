@@ -26,3 +26,8 @@ exports.getUser = function getUser(id) {
     let params = [id];
     return db.query(q, params);
 };
+exports.putUrlIntoTable = function putUrlIntoTable(users_image, id) {
+    let q = `UPDATE users SET users_image=$1 WHERE ID=$2 RETURNING users_image`;
+    let params = [users_image, id];
+    return db.query(q, params);
+};

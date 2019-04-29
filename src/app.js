@@ -2,6 +2,7 @@ import React from "react";
 import axios from "./axios";
 import ProfilePic from "./profilepic";
 import Uploader from "./uploader";
+import Profile from "./profile";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export default class App extends React.Component {
     }
     componentDidMount() {
         axios.get("/user").then(({ data }) => {
+            console.log(data);
             this.setState(data);
         });
     }
@@ -36,8 +38,24 @@ export default class App extends React.Component {
                         this.setState({ isUploaderVisible: true })
                     }
                 />
+
+                <Profile
+                    first={this.state.firstname}
+                    last={this.state.lastname}
+                    profilePic={
+                        <ProfilePic
+                            id={this.state.id}
+                            first={this.state.firstname}
+                            last={this.state.lastname}
+                            image={this.state.image}
+                            onClick={this.showUploader}
+                        />
+                    }
+                />
                 {this.state.isUploaderVisible && (
-                    <Uploader setImage={image => this.setState({ image })} />
+                    <Uploader
+                        setImage={image => this.setState({ image: image })}
+                    />
                 )}
             </div>
         );
