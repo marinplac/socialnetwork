@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "./axios";
-// import ProfilePic from "./profilepic";
 
 export default class Uploader extends React.Component {
     constructor(props) {
@@ -18,7 +17,6 @@ export default class Uploader extends React.Component {
             } else {
                 console.log("Image is uploaded");
                 this.props.setImage(data.users_image);
-                //this.props.clickHandler();
             }
         });
     }

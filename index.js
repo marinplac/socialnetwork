@@ -137,6 +137,14 @@ app.get("/user", (req, res) => {
     });
 });
 
+app.get("/user/:id/json", function(req, res) {
+    if (req.params.id == req.session.userId) {
+        res.json({
+            redirect: true
+        });
+    }
+});
+
 //do not ever delete this!//
 
 app.get("*", function(req, res) {
