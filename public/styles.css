@@ -40,3 +40,8 @@ main {
     height: 140px;
     border-radius: 35px;
 }
+#profilesection {
+    width: 500px;
+    height: 100%;
+    background-color: grey;
+}

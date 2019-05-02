@@ -11,6 +11,7 @@ export default class App extends React.Component {
         super(props);
         this.state = {};
         this.setImage = this.setImage.bind(this);
+        this.updateBio = this.updateBio.bind(this);
     }
     componentDidMount() {
         axios.get("/user").then(({ data }) => {
@@ -22,6 +23,12 @@ export default class App extends React.Component {
         console.log("setimage");
         this.setState({
             users_image: image
+        });
+    }
+    updateBio(newbio) {
+        console.log("updated bio");
+        this.setState({
+            bio: newbio
         });
     }
     render() {
@@ -37,12 +44,13 @@ export default class App extends React.Component {
             );
         }
         return (
-            // <BrowserRouter>
             <div>
                 <img src="/mountainlogo.png" />
                 <Profile
                     image={this.state.users_image}
                     setImage={this.setImage}
+                    bio={this.state.bio}
+                    updateBio={this.updateBio}
                 />
             </div>
         );

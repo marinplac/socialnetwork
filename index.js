@@ -137,12 +137,26 @@ app.get("/user", (req, res) => {
     });
 });
 
-app.get("/user/:id/json", function(req, res) {
+app.get("/user/:id.json", function(req, res) {
     if (req.params.id == req.session.userId) {
         res.json({
             redirect: true
         });
     }
+});
+
+app.post("/user/bio", function(req, res) {
+    console.log("posting the bio is happening", req.body);
+    let bio = req.body.bio;
+    db.setBio(req.session.userId, bio)
+        .then(data => {
+            console.log(req.session, "this is session label");
+            res.json({ success: true });
+        })
+        .catch(err => {
+            console.log(err, "this errore");
+            res.json({ success: false });
+        });
 });
 
 //do not ever delete this!//

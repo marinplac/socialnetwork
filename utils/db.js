@@ -31,3 +31,10 @@ exports.putUrlIntoTable = function putUrlIntoTable(users_image, id) {
     let params = [users_image, id];
     return db.query(q, params);
 };
+exports.setBio = function setBio(id, bio) {
+    let q = `UPDATE users
+    SET bio = $2
+    WHERE ID = $1`;
+    let params = [id, bio];
+    return db.query(q, params);
+};
