@@ -133,16 +133,26 @@ app.get("/user", (req, res) => {
     let lastname = req.body.lastname;
     let profilePic = req.body.users_image;
     db.getUser(req.session.userId).then(result => {
+        console.log(result, "result from getting user");
         res.json(result.rows[0]);
     });
 });
 
-app.get("/user/:id.json", function(req, res) {
-    if (req.params.id == req.session.userId) {
-        res.json({
-            redirect: true
+app.get("/user/:id/json", function(req, res) {
+    if (req.session.userId == req.params.id) {
+        return res.json({
+            redirectTo: "/"
         });
     }
+    db.getUser(req.params.id)
+        .then(data => {
+            console.log(data, "this is get user data");
+
+            res.json(data.rows[0]);
+        })
+        .catch(err => {
+            console.log("error happening in getting other user", err);
+        });
 });
 
 app.post("/user/bio", function(req, res) {

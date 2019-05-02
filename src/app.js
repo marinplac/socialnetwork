@@ -1,10 +1,8 @@
 import React from "react";
 import axios from "./axios";
-// import ProfilePic from "./profilepic";
-// import Uploader from "./uploader";
 import Profile from "./profile";
-// import { BrowserRouter, Route, Router, Link } from "react-router-dom";
-// import BioEditor from "./bioeditor";
+import OtherProfile from "./otherprofile";
+import { BrowserRouter, Route } from "react-router-dom";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -46,12 +44,23 @@ export default class App extends React.Component {
         return (
             <div>
                 <img src="/mountainlogo.png" />
-                <Profile
-                    image={this.state.users_image}
-                    setImage={this.setImage}
-                    bio={this.state.bio}
-                    updateBio={this.updateBio}
-                />
+                <BrowserRouter>
+                    <div>
+                        <Route
+                            exact
+                            path="/"
+                            render={() => (
+                                <Profile
+                                    image={this.state.users_image}
+                                    setImage={this.setImage}
+                                    bio={this.state.bio}
+                                    updateBio={this.updateBio}
+                                />
+                            )}
+                        />
+                        <Route path="/user/:id" component={OtherProfile} />
+                    </div>
+                </BrowserRouter>
             </div>
         );
     }

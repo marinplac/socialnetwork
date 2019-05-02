@@ -45,3 +45,10 @@ main {
     height: 100%;
     background-color: grey;
 }
+#otherprofile {
+    width: 500px;
+    height: 100%;
+    border: 2px solid grey;
+    background-color: grey;
+    font-size: 10px;
+}
