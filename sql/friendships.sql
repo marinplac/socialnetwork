@@ -1,5 +1,8 @@
-//the db query that should be made//
+DROP TABLE IF EXISTS friendships;
 
-SELECT * FROM friendships
-WHERE (recipient_id = $1 AND sender_id = $2)
-OR (recipient_id = $2 AND sender_id = $1);
+CREATE TABLE friendships(
+id SERIAL PRIMARY KEY,
+sender_id VARCHAR (200) NOT NULL,
+recepient_id VARCHAR (200) NOT NULL,
+accepted BOOLEAN DEFAULT false
+);
