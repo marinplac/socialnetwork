@@ -39,10 +39,10 @@ exports.setBio = function setBio(id, bio) {
     return db.query(q, params);
 };
 
-// exports.getFriendReq = function getFriendReq(id) {
-//     let q = `SELECT * FROM friendships
-//     WHERE (recepient_id = $1 AND sender_id = $2)
-//     OR (recepient_id = $2 AND sender_id = $1)`;
-//     let params = [id];
-//     return db.query(q, params);
-// };
+exports.getFriendReq = function getFriendReq(recipient_id, sender_id) {
+    let q = `SELECT * FROM friendships
+    WHERE (recipient_id = $1 AND sender_id = $2)
+    OR (recipient_id = $2 AND sender_id = $1)`;
+    let params = [recipient_id, sender_id];
+    return db.query(q, params);
+};

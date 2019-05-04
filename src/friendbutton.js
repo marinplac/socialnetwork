@@ -7,7 +7,17 @@ export default class FriendButton extends React.Component {
         this.state = {};
     }
     componentDidMount() {
-        const id = this.props.match.params.id;
+        const id = this.props.recipient_id;
         const self = this;
+        axios.get("/user/friendrequest/" + id + "/json").then(({ data }) => {
+            console.log(data, "this is data of friendrequest");
+        });
+    }
+    render() {
+        return (
+            <div id="sendfriendrequest">
+                <button>Send friend req</button>
+            </div>
+        );
     }
 }

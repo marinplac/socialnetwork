@@ -56,6 +56,8 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
+//routes//
+
 app.get("/welcome", (req, res) => {
     if (req.session.userId) {
         res.redirect("/");
@@ -169,6 +171,15 @@ app.post("/user/bio", function(req, res) {
         });
 });
 
+//friends requests//
+app.get("/user/friendrequest/:id/json", function(req, res) {
+    console.log("getting the requested friendship", req.body);
+    db.getFriendReq(req.session.userId, req.params.id).then(data => {
+        console.log(data, "this is fucking data");
+    });
+});
+// app.post("/user/")
+
 //do not ever delete this!//
 
 app.get("*", function(req, res) {
@@ -182,5 +193,3 @@ app.get("*", function(req, res) {
 app.listen(8080, function() {
     console.log("I'm listening to your commands, master.");
 });
-
-// function requireUser
