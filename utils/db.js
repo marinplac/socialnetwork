@@ -46,3 +46,24 @@ exports.getFriendReq = function getFriendReq(recipient_id, sender_id) {
     let params = [recipient_id, sender_id];
     return db.query(q, params);
 };
+exports.beFriend = function beFriend(sender_id, recipient_id) {
+    let q = `INSERT INTO friendships (sender_id, recipient_id, accepted)
+    VALUES ($1, $2, false) RETURNING ID`;
+    let params = [sender_id, recipient_id];
+    return db.query(q, params);
+};
+exports.cancelReq = function cancelReq(sender_id) {
+    let q = `DELETE FROM friendships WHERE sender_id = $1`;
+    let params = [sender_id];
+    return db.query(q, params);
+};
+exports.acceptReq = function acceptReq(sender_id, recipient_id) {
+    let q = `INSERT INTO friendships (sender_id,recipient_id, accepted) VALUES ($1, $2, false) RETURNING ID`;
+    let params = [sender_id, recipient_id];
+    return db.query(q, params);
+};
+exports.endFriend = function endFriend(sender_id) {
+    let q = `DELETE FROM friendships WHERE sender_id = $1`;
+    let params = [sender_id];
+    return db.query(q, params);
+};

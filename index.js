@@ -135,7 +135,7 @@ app.get("/user", (req, res) => {
     let lastname = req.body.lastname;
     let profilePic = req.body.users_image;
     db.getUser(req.session.userId).then(result => {
-        console.log(result, "result from getting user");
+        // console.log(result, "result from getting user");
         res.json(result.rows[0]);
     });
 });
@@ -148,7 +148,7 @@ app.get("/user/:id/json", function(req, res) {
     }
     db.getUser(req.params.id)
         .then(data => {
-            console.log(data, "this is get user data");
+            // console.log(data, "this is get user data");
 
             res.json(data.rows[0]);
         })
@@ -175,10 +175,54 @@ app.post("/user/bio", function(req, res) {
 app.get("/user/friendrequest/:id/json", function(req, res) {
     console.log("getting the requested friendship", req.body);
     db.getFriendReq(req.session.userId, req.params.id).then(data => {
-        console.log(data, "this is fucking data");
+        console.log(data.rows, "this is the effing data");
+        if (data.rows.length === 0) {
+            // console.log("there is a friendship of some sort", data.rows[0]);
+            res.json({ buttontext: "send friend request" });
+        } else if (data.rows[0].sender_id == req.session.userId) {
+            res.json({ buttontext: "cancel friend request" });
+        } else if (data.rows[0].recipient_id == req.session.userId) {
+            res.json({ buttontext: "accept friend request" });
+        } else {
+            res.json({ buttontext: "unfriend" });
+        }
     });
 });
-// app.post("/user/")
+app.post("/user/makefriendship/:id/json", function(req, res) {
+    console.log("getting to makefriendship", req.body);
+    db.beFriend(req.session.userId, req.params.id)
+        .then(data => {
+            console.log("data from makefriendship", data);
+            res.json({ buttontext: "cancel friendship req" });
+        })
+        .catch(err => {
+            console.log("error in sending friendship request");
+        });
+});
+app.post("/user/cancelfriendship/:id/json", function(req, res) {
+    console.log("getting to cancelfriendshiprequest", req.body);
+    db.cancelReq(req.session.userId).then(data => {
+        res.json({ buttontext: "send friendship request" }).catch(err => {
+            console.log("error in canceling friendship");
+        });
+    });
+});
+app.post("/user/acceptfriendship/:id/json", function(req, res) {
+    console.log("getting to accepting friendship", req.body);
+    db.acceptReq(req.session.userId, req.params.id).then(data => {
+        res.json({ buttontext: "end friendship" }).catch(err => {
+            console.log("error in accepting friendship");
+        });
+    });
+});
+app.post("/user/endfriendship/:id/json", function(req, res) {
+    console.log("getting to end friendship", req.body);
+    db.endFriend(req.session.userId).then(data => {
+        res.json({ buttontext: "send friendship request" }).catch(err => {
+            console.log("error in ending friendship");
+        });
+    });
+});
 
 //do not ever delete this!//
 

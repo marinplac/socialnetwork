@@ -11,7 +11,6 @@ export default function Profile(props) {
             <Uploader setImage={props.setImage} />
             <BioEditor bio={props.bio} updateBio={props.updateBio} />
             <p>{props.bio}</p>
-            <FriendButton />
         </div>
     );
 }
