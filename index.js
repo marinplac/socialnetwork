@@ -224,6 +224,18 @@ app.post("/user/endfriendship/:id/json", function(req, res) {
     });
 });
 
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/welcome");
+});
+
+app.get("/friends", (req, res) => {
+    db.getFriendsAndWannabes(req.session.userId, req.params.id).then(data => {
+        console.log(data.rows);
+        res.json(data.rows[0]);
+    });
+});
+
 //do not ever delete this!//
 
 app.get("*", function(req, res) {

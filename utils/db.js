@@ -67,3 +67,15 @@ exports.endFriend = function endFriend(sender_id) {
     let params = [sender_id];
     return db.query(q, params);
 };
+exports.getFriendsAndWannabes = function getFriendsAndWannabes(id) {
+    let q = `
+    SELECT users.id, firstname, lastname, users_image, accepted
+    FROM friendships
+    JOIN users
+    ON (accepted = false AND recipient_id = $1 AND sender_id = users.id)
+    OR (accepted = true AND recipient_id = $1 AND sender_id = users.id)
+    OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)
+`;
+    let params = [id];
+    return db.query(q, params);
+};

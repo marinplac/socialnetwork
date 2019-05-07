@@ -2,7 +2,7 @@ import React from "react";
 import ProfilePic from "./profilepic";
 import BioEditor from "./bioeditor";
 import Uploader from "./uploader";
-import FriendButton from "./friendbutton";
+// import FriendButton from "./friendbutton";
 
 export default function Profile(props) {
     return (
@@ -11,6 +11,9 @@ export default function Profile(props) {
             <Uploader setImage={props.setImage} />
             <BioEditor bio={props.bio} updateBio={props.updateBio} />
             <p>{props.bio}</p>
+            <a href="/logout" className="logoutbutton">
+                Log out
+            </a>
         </div>
     );
 }
