@@ -2,10 +2,10 @@
     /* background-color: #d8dfe2; */
 }
 main {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     font-family: "Permanent Marker", cursive;
     color: #d8dfe2;
     background-image: url(b.jpg);
@@ -58,4 +58,24 @@ main {
     border: 2px solid black;
     background-color: #d8dfe2;
     font-family: "Permanent Marker", cursive;
+}
+#headerofprofile {
+    /* border: 2px solid salmon; */
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+#profilepic {
+    width: 100px;
+    height: 100px;
+    border-radius: 45px;
+}
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

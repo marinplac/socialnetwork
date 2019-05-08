@@ -68,6 +68,7 @@ exports.endFriend = function endFriend(sender_id) {
     return db.query(q, params);
 };
 exports.getFriendsAndWannabes = function getFriendsAndWannabes(id) {
+    console.log(id, "in db.js");
     let q = `
     SELECT users.id, firstname, lastname, users_image, accepted
     FROM friendships

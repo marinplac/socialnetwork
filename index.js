@@ -229,11 +229,16 @@ app.get("/logout", (req, res) => {
     res.redirect("/welcome");
 });
 
-app.get("/friends", (req, res) => {
-    db.getFriendsAndWannabes(req.session.userId, req.params.id).then(data => {
-        console.log(data.rows);
-        res.json(data.rows[0]);
-    });
+app.get("/friendsdata", (req, res) => {
+    console.log(req.session.userId);
+    db.getFriendsAndWannabes(req.session.userId)
+        .then(data => {
+            console.log(data.rows, "it is getting to friends");
+            res.json(data.rows);
+        })
+        .catch(err => {
+            console.log(err, "error in friends");
+        });
 });
 
 //do not ever delete this!//

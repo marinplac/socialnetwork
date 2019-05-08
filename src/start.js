@@ -10,9 +10,9 @@ import reducer from "./reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 
-// const store = createStore(reducer, applyMiddleware(reduxPromise));
+const store = createStore(reducer, applyMiddleware(reduxPromise));
 
-// import { init } from "./socket";
+// import { getSocket } from "./socket";
 
 // import * as io from 'socket.io-client';
 // const socket = io.connect();
@@ -20,18 +20,11 @@ import { Provider } from "react-redux";
 //     console.log(data);
 // });
 
-const store = createStore(
-    reducer,
-    composeWithDevTools(applyMiddleware(reduxPromise))
-);
-
 let elem;
 
 if (location.pathname == "/welcome") {
-    // console.log("do something");
     elem = <Welcome />;
 } else {
-    // console.log("do something else");
     elem = (
         <Provider store={store}>
             <App />
