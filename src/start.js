@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
+import { Provider } from "react-redux";
 import Welcome from "./welcome";
 import App from "./app";
 
@@ -8,9 +8,11 @@ import { createStore, applyMiddleware } from "redux";
 import reduxPromise from "redux-promise";
 import reducer from "./reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { Provider } from "react-redux";
 
-const store = createStore(reducer, applyMiddleware(reduxPromise));
+const store = createStore(
+    reducer,
+    composeWithDevTools(applyMiddleware(reduxPromise))
+);
 
 // import { getSocket } from "./socket";
 

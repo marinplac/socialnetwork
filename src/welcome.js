@@ -8,12 +8,17 @@ export default class Welcome extends React.Component {
     render() {
         return (
             <div>
-                <h1>MOUNTAIN LOVERS</h1>
+                <div id="logodiv">
+                    <img id="logopic" src="/mountainlogo.png" />
+                </div>
+                <div id="titlemountainlovers">
+                    <h1>MOUNTAIN LOVERS</h1>
+                    <p>Welcome!</p>
+                </div>
+
                 <div id="welcome">
-                    <h1>Welcome!</h1>
-                    <img src="/mountainlogo.png" />
                     <HashRouter>
-                        <div>
+                        <div id="registrationandloginform">
                             <Route exact path="/" component={Registration} />
                             <Route path="/login" component={Login} />
                         </div>

@@ -34,10 +34,12 @@ export default class OtherProfile extends React.Component {
     render() {
         return (
             <div id="otherprofile">
-                <img src={this.state.users_image} />
-                <h1>{this.state.firstname}</h1>
-                <h1>{this.state.lastname}</h1>
-                <h1>{this.state.bio}</h1>
+                <img id="otherprofilepic" src={this.state.users_image} />
+                <div id="nameandsurnameotherprofile">
+                    <p className="othername">{this.state.firstname}</p>
+                    <p className="othername">{this.state.lastname}</p>
+                </div>
+                <p className="otherbio">{this.state.bio}</p>
                 <FriendButton recipient_id={this.props.match.params.id} />{" "}
             </div>
         );

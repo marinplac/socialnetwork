@@ -18,7 +18,7 @@
 export default function(state = {}, action) {
     if (action.type == "RECEIVE_FRIENDS") {
         return Object.assign({}, state, {
-            friendshipacceptedorsthsimilar: true
+            friends: action.connections
         });
     }
     if (action.type == "ACCEPT_FRIEND_REQUEST") {
