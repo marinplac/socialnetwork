@@ -47,7 +47,10 @@ export default class App extends React.Component {
         return (
             <div>
                 <div id="headerofprofile">
-                    <img id="logopic" src="/mountainlogo.png" />
+                    <a href="/">
+                        <img id="logopic" src="/mountainlogo.png" />{" "}
+                    </a>
+
                     <ProfilePic
                         firstname={this.state.firstname}
                         image={this.state.users_image}

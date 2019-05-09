@@ -21,13 +21,14 @@ export default function(state = {}, action) {
             friends: action.connections
         });
     }
-    if (action.type == "ACCEPT_FRIEND_REQUEST") {
-        const user = { ...state.user, bio: action.bio };
-        return { ...state, user };
-    }
     return state;
 }
-// if (action.type == "UNFRIEND") {
+//     else if (action.type == "ACCEPT_FRIEND_REQUEST") {
+//         const user = { ...state.user, bio: action.bio };
+//         return { ...state, user };
+//     }
+//     else (action.type == "UNFRIEND") {
+//         userId == action.id;
+//     }
+//     return state;
 // }
-
-// * conditionals for 3 action types: 'RECEIVE_FRIENDS', 'ACCEPT_FRIEND_REQUEST', 'UNFRIEND'

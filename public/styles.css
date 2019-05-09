@@ -69,6 +69,8 @@ body {
 }
 .othername {
     margin: 5px;
+    width: 100px;
+    height: 100px;
 }
 .otherbio {
     margin: 5px;

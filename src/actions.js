@@ -6,21 +6,19 @@ export async function receiveFriends() {
 
     return { type: "RECEIVE_FRIENDS", connections: data };
 }
-// export async function acceptFriendRequest() {
-//     let otherUserId = req.params.id;
-//     axios.post("/friendship-with/'+ id").then(({ data }) => {
+// export async function acceptFriendRequest(id) {
+//     axios.post("/user/acceptfriendship/:id/json", id).then(({ data }) => {
 //         return {
 //             type: "ACCEPT_FRIEND_REQUEST",
-//             otherUserId
+//             id
 //         };
 //     });
 // }
-// export async function unfriend() {
-//     let otherUserId = req.params.id;
-//     axios.post("/cancelfriendship" + otherUserId).then(({ data }) => {
+// export async function unfriend(id) {
+//     axios.post("/user/cancelfriendship/:id/json" + id).then(({ data }) => {
 //         return {
 //             type: "UNFRIEND",
-//             otherUserId
+//             id
 //         };
 //     });
 // }

@@ -26,25 +26,26 @@ class Friends extends React.Component {
         return (
             <div id="thesepeople">
                 <div>
-                    {this.props.friends.map(poorfriend => {
-                        console.log(poorfriend.firstname);
-                        return (
-                            <div id="friendinfriends" key={poorfriend.id}>
-                                <img
-                                    id="friendsimage"
-                                    src={poorfriend.users_image}
-                                />
-                                <div id="friendsname">
-                                    <p className="names">
-                                        {poorfriend.firstname}
-                                    </p>
-                                    <p className="names">
-                                        {poorfriend.lastname}
-                                    </p>
+                    {this.props.friends &&
+                        this.props.friends.map(poorfriend => {
+                            console.log(poorfriend.firstname);
+                            return (
+                                <div id="friendinfriends" key={poorfriend.id}>
+                                    <img
+                                        id="friendsimage"
+                                        src={poorfriend.users_image}
+                                    />
+                                    <div id="friendsname">
+                                        <p className="names">
+                                            {poorfriend.firstname}
+                                        </p>
+                                        <p className="names">
+                                            {poorfriend.lastname}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
                 </div>
             </div>
         );
