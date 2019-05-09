@@ -193,7 +193,7 @@ app.post("/user/makefriendship/:id/json", function(req, res) {
     db.beFriend(req.session.userId, req.params.id)
         .then(data => {
             console.log("data from makefriendship", data);
-            res.json({ buttontext: "cancel friendship req" });
+            res.json({ buttontext: "accept friendship req" });
         })
         .catch(err => {
             console.log("error in sending friendship request");
@@ -201,7 +201,7 @@ app.post("/user/makefriendship/:id/json", function(req, res) {
 });
 app.post("/user/cancelfriendship/:id/json", function(req, res) {
     console.log("getting to cancelfriendshiprequest", req.body);
-    db.cancelReq(req.session.userId).then(data => {
+    db.cancelReq(req.session.userId, req.params.id).then(data => {
         res.json({ buttontext: "send friendship request" }).catch(err => {
             console.log("error in canceling friendship");
         });
@@ -217,7 +217,7 @@ app.post("/user/acceptfriendship/:id/json", function(req, res) {
 });
 app.post("/user/endfriendship/:id/json", function(req, res) {
     console.log("getting to end friendship", req.body);
-    db.endFriend(req.session.userId).then(data => {
+    db.endFriend(req.session.userId, req.params.id).then(data => {
         res.json({ buttontext: "send friendship request" }).catch(err => {
             console.log("error in ending friendship");
         });

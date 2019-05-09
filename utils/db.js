@@ -52,9 +52,10 @@ exports.beFriend = function beFriend(sender_id, recipient_id) {
     let params = [sender_id, recipient_id];
     return db.query(q, params);
 };
-exports.cancelReq = function cancelReq(sender_id) {
-    let q = `DELETE FROM friendships WHERE sender_id = $1`;
-    let params = [sender_id];
+exports.cancelReq = function cancelReq(sender_id, recipient_id) {
+    let q = `DELETE FROM friendships WHERE (sender_id = $1 AND recipient_id=$2)
+    OR (sender_id = $2 AND recipient_id=$1)`;
+    let params = [sender_id, recipient_id];
     return db.query(q, params);
 };
 exports.acceptReq = function acceptReq(sender_id, recipient_id) {
@@ -62,9 +63,10 @@ exports.acceptReq = function acceptReq(sender_id, recipient_id) {
     let params = [sender_id, recipient_id];
     return db.query(q, params);
 };
-exports.endFriend = function endFriend(sender_id) {
-    let q = `DELETE FROM friendships WHERE sender_id = $1`;
-    let params = [sender_id];
+exports.endFriend = function endFriend(sender_id, recipient_id) {
+    let q = `DELETE FROM friendships WHERE (sender_id = $1 AND recipient_id=$2)
+    OR (sender_id = $2 AND recipient_id=$1)`;
+    let params = [sender_id, recipient_id];
     return db.query(q, params);
 };
 exports.getFriendsAndWannabes = function getFriendsAndWannabes(id) {
